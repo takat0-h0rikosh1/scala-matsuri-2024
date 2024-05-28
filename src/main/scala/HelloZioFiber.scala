@@ -64,7 +64,7 @@ object HelloZioFiber extends ZIOAppDefault {
     fibers <- ZIO.collectAllPar((1 to 1000000).map(_ => task.fork))
     intSeq <- ZIO.collectAll(fibers.map(_.join))
     end <- currentTime(TimeUnit.MILLISECONDS)
-    _ <- ZIO.debug(s"Time: ${end - start}")
+    _ <- ZIO.debug(s"Time: ${end - start}ms")
     _ <- ZIO.debug(s"Count: ${intSeq.sum}")
   } yield ()
 

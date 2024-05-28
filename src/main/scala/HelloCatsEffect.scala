@@ -14,7 +14,7 @@ object HelloCeFiber extends IOApp {
       fibers <- (1 to 1000000).toList.map(_ => taskIO.start).parSequence
       intSeq <- fibers.map(_.joinWithNever).sequence
       end <- IO.realTime
-      _ <- IO.println(s"Result: ${(end - start).toMillis}")
+      _ <- IO.println(s"Time: ${(end - start).toMillis}ms")
       _ <- IO.println(s"Count: ${intSeq.sum}")
     } yield ExitCode.Success
   }
